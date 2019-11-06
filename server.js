@@ -5,6 +5,7 @@ const mongoose = require ("mongoose");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const apiRoutes = require("./routes/apiRoutes");
+require('dotenv').config()
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -14,7 +15,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-mongoose.connect('mongodb://localhost/my_database', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
